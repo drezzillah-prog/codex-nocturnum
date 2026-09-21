@@ -1,11 +1,25 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import "./threshold.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ThresholdIntro } from "@/components/ThresholdIntro";
 import { getSiteUrl } from "@/lib/site-url";
+
+const displayFont = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const bodyFont = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-source-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -18,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <body>
         <ThresholdIntro />
         <div className="ambient-glow" aria-hidden="true" />

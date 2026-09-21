@@ -102,12 +102,14 @@ export function ThresholdIntro() {
   const contextRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
+    const forceReplay = new URLSearchParams(window.location.search).get("threshold") === "1";
+
     try {
-      if (sessionStorage.getItem(SESSION_KEY) === "seen") {
+      if (!forceReplay && sessionStorage.getItem(SESSION_KEY) === "seen") {
         setVisible(false);
         return;
       }
-      sessionStorage.setItem(SESSION_KEY, "seen");
+      if (!forceReplay) sessionStorage.setItem(SESSION_KEY, "seen");
     } catch {
       // Session storage can be unavailable in hardened/private contexts.
     }

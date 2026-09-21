@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function NotFound() { return <div className="paper-page"><section className="empty-state page-width not-found"><span>∴</span><p className="eyebrow">Folio missing</p><h1>This page has slipped from the binding.</h1><p>The index has no record matching this address.</p><Link className="button-primary" href="/archive">Return to the archive</Link></section></div>; }

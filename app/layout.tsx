@@ -6,6 +6,7 @@ import "./threshold.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ThresholdIntro } from "@/components/ThresholdIntro";
+import { PricingProvider } from "@/components/PricingProvider";
 import { getSiteUrl } from "@/lib/site-url";
 
 const displayFont = Cormorant_Garamond({
@@ -34,11 +35,13 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <body>
-        <ThresholdIntro />
-        <div className="ambient-glow" aria-hidden="true" />
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
+        <PricingProvider>
+          <ThresholdIntro />
+          <div className="ambient-glow" aria-hidden="true" />
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
+        </PricingProvider>
       </body>
     </html>
   );

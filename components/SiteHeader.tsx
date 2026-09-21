@@ -66,6 +66,12 @@ export function SiteHeader() {
             <small>Browse all folios</small>
           </Link>
 
+          <Link href="/shop" className={pathname.startsWith("/shop") ? "is-current" : ""}>
+            <span>CABINET</span>
+            <strong>Shop</strong>
+            <small>Objects & editions</small>
+          </Link>
+
           <details className="archive-nav__group">
             <summary>
               <span>IV</span>
@@ -114,6 +120,7 @@ export function SiteHeader() {
             <p className="eyebrow">Explore</p>
             <Link href="/codex"><strong>The Codex</strong><span>How the archive is organised</span></Link>
             <Link href="/archive"><strong>Archive</strong><span>All folios, filters and regions</span></Link>
+            <Link href="/shop"><strong>The Cabinet</strong><span>Objects, editions and collector pieces</span></Link>
           </section>
 
           <section className="mobile-index__section">

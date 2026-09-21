@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { BrandSeal } from "./Ornaments";
 
-const SESSION_KEY = "codex-nocturnum-threshold-v3";
-const FULL_DURATION = 6200;
+const SESSION_KEY = "codex-nocturnum-threshold-v4";
+const FULL_DURATION = 8900;
 
 function playDoorSound(ref: React.MutableRefObject<AudioContext | null>) {
   const context = ref.current ?? new AudioContext();
@@ -12,10 +12,10 @@ function playDoorSound(ref: React.MutableRefObject<AudioContext | null>) {
 
   const begin = () => {
     const now = context.currentTime;
-    const creakAt = now + 0.65;
-    const thumpAt = now + 1.85;
+    const creakAt = now + 1.25;
+    const thumpAt = now + 3.35;
 
-    const noiseBuffer = context.createBuffer(1, Math.floor(context.sampleRate * 1.65), context.sampleRate);
+    const noiseBuffer = context.createBuffer(1, Math.floor(context.sampleRate * 2.55), context.sampleRate);
     const data = noiseBuffer.getChannelData(0);
     for (let index = 0; index < data.length; index += 1) {
       const progress = index / data.length;
@@ -28,11 +28,11 @@ function playDoorSound(ref: React.MutableRefObject<AudioContext | null>) {
     const filter = context.createBiquadFilter();
     filter.type = "lowpass";
     filter.frequency.setValueAtTime(860, creakAt);
-    filter.frequency.exponentialRampToValueAtTime(190, creakAt + 1.45);
+    filter.frequency.exponentialRampToValueAtTime(165, creakAt + 2.2);
     const noiseGain = context.createGain();
     noiseGain.gain.setValueAtTime(0.0001, creakAt);
     noiseGain.gain.exponentialRampToValueAtTime(0.07, creakAt + 0.12);
-    noiseGain.gain.exponentialRampToValueAtTime(0.0001, creakAt + 1.55);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, creakAt + 2.35);
     noise.connect(filter).connect(noiseGain).connect(context.destination);
     noise.start(creakAt);
 
@@ -40,13 +40,13 @@ function playDoorSound(ref: React.MutableRefObject<AudioContext | null>) {
     const groanGain = context.createGain();
     groan.type = "triangle";
     groan.frequency.setValueAtTime(76, creakAt);
-    groan.frequency.exponentialRampToValueAtTime(43, creakAt + 1.5);
+    groan.frequency.exponentialRampToValueAtTime(38, creakAt + 2.2);
     groanGain.gain.setValueAtTime(0.0001, creakAt);
     groanGain.gain.exponentialRampToValueAtTime(0.035, creakAt + 0.14);
-    groanGain.gain.exponentialRampToValueAtTime(0.0001, creakAt + 1.55);
+    groanGain.gain.exponentialRampToValueAtTime(0.0001, creakAt + 2.35);
     groan.connect(groanGain).connect(context.destination);
     groan.start(creakAt);
-    groan.stop(creakAt + 1.6);
+    groan.stop(creakAt + 2.4);
 
     const thump = context.createOscillator();
     const thumpGain = context.createGain();
@@ -119,7 +119,7 @@ export function ThresholdIntro() {
         Skip
       </button>
 
-      {!soundEnabled && <div className="threshold-v3__sound">tap for sound</div>}
+      {!soundEnabled && <div className="threshold-v3__sound">tap for creak + thump</div>}
 
       <div className="threshold-v3__dark" aria-hidden="true" />
       <div className="threshold-v3__smoke" aria-hidden="true"><i /><i /><i /></div>

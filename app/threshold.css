@@ -32,3 +32,58 @@
 @keyframes thresholdV3Dark{to{opacity:.14}}@keyframes thresholdV3Smoke{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}24%{opacity:.95}100%{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}@keyframes thresholdV3Ash{0%{opacity:0;transform:translate(0,0) scale(.2)}14%{opacity:.96}70%{opacity:.75}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.8)}}@keyframes thresholdV3Glint{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}72%{opacity:.6}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(.3)}}@keyframes thresholdV3GateIn{to{opacity:1;transform:scale(1);filter:blur(0)}}@keyframes thresholdV3Seal{to{opacity:0;transform:translate(-50%,-50%) scale(.82)}}@keyframes thresholdV3DoorLeft{to{transform:rotateY(-110deg)}}@keyframes thresholdV3DoorRight{to{transform:rotateY(110deg)}}@keyframes thresholdV3GateGone{to{opacity:0;transform:scale(1.16);filter:blur(2px)}}@keyframes thresholdV3CorridorShow{to{opacity:1}}@keyframes thresholdV3Rush{0%{transform:scale(.42);filter:blur(.8px)}58%{transform:scale(1.3);filter:blur(0)}100%{transform:scale(3.2);filter:blur(2px);opacity:.73}}@keyframes thresholdV3Paper{0%{opacity:0;transform:translateY(10px) rotate(-8deg) scale(.4)}25%{opacity:.65}100%{opacity:0;transform:translateY(-54vh) rotate(230deg) scale(2.2)}}@keyframes thresholdV3Vignette{to{box-shadow:inset 0 0 42px 12px rgba(0,0,0,.34)}}@keyframes thresholdV3Exit{to{opacity:0;visibility:hidden}}
 @media(max-width:700px){.threshold-v3__arch{width:97vw;height:79vh;border-width:15px}.threshold-v3__gate{width:88vw;height:69vh}.threshold-v3__seal{width:112px}.threshold-v3__seal .brand-seal{width:48px;height:48px}.threshold-v3__wall{width:50%;padding-inline:1vw}.threshold-v3__vanish{width:14vw}}
 @media(prefers-reduced-motion:reduce){.threshold-v3{animation:thresholdV3Exit .45s .15s ease forwards}.threshold-v3__smoke,.threshold-v3__ash,.threshold-v3__glints,.threshold-v3__gate-stage,.threshold-v3__corridor,.threshold-v3__vignette{display:none}}
+
+
+/* Threshold v4 — slower, heavier, dustier, less theatrical */
+.threshold-v3{background:#010101;animation:thresholdV4Exit .8s 8.05s ease forwards}
+.threshold-v3__sound{color:rgba(211,194,160,.38)}
+.threshold-v3__dark{background:radial-gradient(ellipse at 50% 46%,#120e0b 0,#050403 28%,#010101 68%);animation:thresholdV4Dark 2.2s ease forwards}
+.threshold-v3__smoke i{width:26vw;height:18vw;background:radial-gradient(ellipse,rgba(2,2,2,.98),rgba(5,5,5,.82) 42%,rgba(12,10,8,.42) 64%,transparent 78%);filter:blur(27px);animation:thresholdV4Smoke 2.15s ease-out forwards}
+.threshold-v3__smoke i:nth-child(2){animation-delay:.12s}.threshold-v3__smoke i:nth-child(3){animation-delay:.2s}
+.threshold-v3__ash i{background:#030303;box-shadow:0 0 15px rgba(0,0,0,.98);filter:blur(.25px);animation:thresholdV4Ash 1.9s ease-out forwards}
+.threshold-v3__ash i:nth-child(3n){filter:blur(2.4px);opacity:.88}
+.threshold-v3__glints i{width:1px;height:1px;background:#9b7a42;box-shadow:0 0 4px rgba(171,132,67,.55);animation:thresholdV4Glint 1.6s ease-out forwards}
+.threshold-v3__gate-stage{transform:scale(.84) translateY(8px);filter:blur(2px);animation:thresholdV4GateIn 1.15s .72s cubic-bezier(.18,.7,.19,1) forwards,thresholdV4GateGone .75s 4.78s ease-in forwards}
+.threshold-v3__arch{background:
+radial-gradient(circle at 18% 24%,rgba(255,255,255,.018),transparent 11%),
+radial-gradient(circle at 76% 61%,rgba(0,0,0,.35),transparent 18%),
+repeating-linear-gradient(93deg,#17120f 0 38px,#120e0c 39px 78px,#1a1410 79px 118px);
+border-color:#17120f;box-shadow:0 0 0 1px rgba(155,131,82,.09),inset 0 0 80px rgba(0,0,0,.92),0 42px 100px #000}
+.threshold-v3__gate:before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.22;background:repeating-linear-gradient(88deg,transparent 0 17px,rgba(255,255,255,.018) 18px,transparent 20px),repeating-linear-gradient(4deg,transparent 0 42px,rgba(0,0,0,.18) 44px,transparent 47px);mix-blend-mode:overlay}
+.threshold-v3__door{background:
+radial-gradient(ellipse at 27% 21%,rgba(89,51,29,.17),transparent 9%),
+radial-gradient(ellipse at 68% 66%,rgba(0,0,0,.28),transparent 12%),
+linear-gradient(90deg,rgba(0,0,0,.76),transparent 13% 85%,rgba(0,0,0,.66)),
+repeating-linear-gradient(90deg,#1a0f0b 0 21px,#28160f 22px 46px,#1d110c 47px 68px,#24140e 69px 96px);
+box-shadow:inset 0 0 65px rgba(0,0,0,.82),inset 0 0 0 1px rgba(121,88,50,.05)}
+.threshold-v3__door:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 53px,rgba(0,0,0,.16) 55px,transparent 57px),linear-gradient(90deg,rgba(255,255,255,.012),transparent 18% 82%,rgba(255,255,255,.009));opacity:.8}
+.threshold-v3__door span{height:13px;background:linear-gradient(#2a2620 0,#0b0908 45%,#26211d 78%,#0a0908);box-shadow:0 6px 13px rgba(0,0,0,.72)}
+.threshold-v3__door b{width:24px;height:24px;background:radial-gradient(circle at 34% 29%,#51463a 0,#1b1713 38%,#090706 66%,#030302 100%);border:1px solid rgba(142,116,69,.16);box-shadow:0 3px 12px #000}
+.threshold-v3__door--left{animation:thresholdV4DoorLeft 2.55s 2.12s cubic-bezier(.38,.04,.1,1) forwards}
+.threshold-v3__door--right{animation:thresholdV4DoorRight 2.55s 2.12s cubic-bezier(.38,.04,.1,1) forwards}
+.threshold-v3__seal{animation:thresholdV4Seal .48s 1.95s ease forwards}
+.threshold-v3__corridor{transform:scale(.56);animation:thresholdV4CorridorShow .16s 4.66s linear forwards,thresholdV4Rush 3.18s 4.76s cubic-bezier(.15,.62,.18,1) forwards}
+.threshold-v3__wall{background:linear-gradient(90deg,#0f0a07,#040302);filter:saturate(.75)}
+.threshold-v3__wall--right{background:linear-gradient(270deg,#0f0a07,#040302)}
+.threshold-v3__shelf{border-bottom-color:#21150d;box-shadow:0 6px 15px rgba(0,0,0,.92)}
+.threshold-v3__shelf i{background:linear-gradient(90deg,#1b100b,#2b1810,#150d09);box-shadow:inset -1px 0 rgba(0,0,0,.65)}
+.threshold-v3__shelf i:nth-child(2n){background:linear-gradient(90deg,#1d0f10,#32191b,#170b0c)}
+.threshold-v3__shelf i:nth-child(3n){background:linear-gradient(90deg,#0f1712,#1b281e,#0d130f)}
+.threshold-v3__vanish{background:#120c08;box-shadow:0 0 90px rgba(127,84,38,.1)}
+.threshold-v3__paper i{background:#625744;filter:brightness(.7);animation-duration:2.05s}
+.threshold-v3__paper i:nth-child(1){animation-delay:5.1s}.threshold-v3__paper i:nth-child(2){animation-delay:5.35s}.threshold-v3__paper i:nth-child(3){animation-delay:5.22s}.threshold-v3__paper i:nth-child(4){animation-delay:5.5s}
+.threshold-v3__vignette{box-shadow:inset 0 0 210px 120px rgba(0,0,0,.98);animation:thresholdV4Vignette 3.2s 4.72s ease forwards}
+@keyframes thresholdV4Dark{0%{opacity:1}72%{opacity:.72}100%{opacity:.16}}
+@keyframes thresholdV4Smoke{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}18%{opacity:.98}55%{opacity:.88}100%{opacity:0;transform:translate(-50%,-50%) scale(3.2)}}
+@keyframes thresholdV4Ash{0%{opacity:0;transform:translate(0,0) scale(.12)}12%{opacity:.98}72%{opacity:.86}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(2.05)}}
+@keyframes thresholdV4Glint{0%{opacity:0}22%{opacity:.6}62%{opacity:.32}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(.2)}}
+@keyframes thresholdV4GateIn{0%{opacity:0;transform:scale(.77) translateY(14px);filter:blur(5px)}72%{opacity:1}100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}}
+@keyframes thresholdV4Seal{0%{opacity:1;transform:translate(-50%,-50%) scale(1)}45%{transform:translate(-50%,-50%) scale(1.025)}100%{opacity:0;transform:translate(-50%,-50%) scale(.88)}}
+@keyframes thresholdV4DoorLeft{0%{transform:rotateY(0)}13%{transform:rotateY(-2deg)}23%{transform:rotateY(-1deg)}37%{transform:rotateY(-13deg)}100%{transform:rotateY(-108deg)}}
+@keyframes thresholdV4DoorRight{0%{transform:rotateY(0)}13%{transform:rotateY(2deg)}23%{transform:rotateY(1deg)}37%{transform:rotateY(13deg)}100%{transform:rotateY(108deg)}}
+@keyframes thresholdV4GateGone{to{opacity:0;transform:scale(1.12) translateY(-2px);filter:blur(2.2px)}}
+@keyframes thresholdV4CorridorShow{to{opacity:1}}
+@keyframes thresholdV4Rush{0%{transform:scale(.56);filter:blur(.6px)}35%{transform:scale(.82);filter:blur(0)}72%{transform:scale(1.42);filter:blur(.15px)}100%{transform:scale(2.45);filter:blur(1.7px);opacity:.78}}
+@keyframes thresholdV4Vignette{0%{box-shadow:inset 0 0 210px 120px rgba(0,0,0,.98)}100%{box-shadow:inset 0 0 48px 14px rgba(0,0,0,.38)}}
+@keyframes thresholdV4Exit{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.threshold-v3{animation:thresholdV4Exit .45s .15s ease forwards}}

@@ -104,3 +104,23 @@ body{background:#090807;color:var(--ivory);font-family:var(--body)}
 .entry-header{color:#e8dcc8}.entry-subtitle{color:#a77d80}.entry-ledger{border-color:var(--line)}.entry-ledger div{border-color:var(--line)}.entry-ledger dt{color:#776f65}.entry-ledger dd{color:#aaa094}.entry-layout{align-items:start}.entry-body{background:#d8ccb3;color:#211c18;padding:48px 54px;box-shadow:0 24px 70px rgba(0,0,0,.28),inset 0 0 60px rgba(86,55,30,.06);border:1px solid rgba(91,69,45,.26)}.entry-body>.dropcap,.entry-body p{color:#302820}.entry-body h2{color:#211c18}.entry-margin .marginal-note,.specimen-label,.margin-index{color:#9a9184}.specimen-label{background:#11100e;border-color:rgba(224,211,185,.1)}.specimen-label strong{color:#ddd2bf}.specimen-label dd{color:#91887d}.sources-panel,.volume-nav,.source-group{border-color:var(--line)}.sources-panel li,.source-group li{border-bottom-color:var(--line)}.sources-panel li cite,.sources-panel li strong,.source-group li strong,.source-group cite{color:#d9cfbd}.bibliography{color:#d9cfbd}.quote-leaf blockquote{color:#d9cfbd}
 @media(max-width:860px){.home-section-title,.home-regional-v3,.home-editorial-v3__inner{grid-template-columns:1fr;gap:18px}.home-pathways__grid{grid-template-columns:1fr 1fr}.home-volume-row{grid-template-columns:46px 1fr 30px}.home-volume-row__desc{grid-column:2;grid-row:2;margin-top:-10px}.home-volume-row__arrow{grid-column:3;grid-row:1/3}.entry-body{padding:36px 30px}}
 @media(max-width:560px){.hero-v3{min-height:650px}.hero-v3 h1{font-size:15vw}.home-index-v3,.home-folios-v3,.home-regional-v3,.home-pathways{padding-block:58px}.home-pathways__grid{grid-template-columns:1fr}.home-volume-row{grid-template-columns:38px 1fr 26px;gap:10px}.home-volume-row__title{font-size:1.2rem}.home-regional-v3__plate{min-height:280px}.entry-body{padding:28px 20px}.archive-nav{display:none}}
+
+
+/* Archive navigation v4 — compact horizontal index tabs */
+.site-header--archive{background:rgba(7,7,6,.975);box-shadow:0 8px 30px rgba(0,0,0,.22)}
+.header-inner--archive{height:74px;display:grid;grid-template-columns:minmax(230px,1fr) auto 46px;gap:18px;align-items:center}
+.archive-nav{height:48px;align-self:center;display:flex;align-items:stretch;padding:3px;border:1px solid rgba(142,116,69,.22);background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(0,0,0,.08));box-shadow:inset 0 0 0 1px rgba(255,255,255,.012),0 5px 18px rgba(0,0,0,.18)}
+.archive-nav>a,.archive-nav__group>summary{height:40px;min-width:106px;padding:6px 14px;border-left:0;border-right:1px solid rgba(224,211,185,.07);display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr 1fr;column-gap:8px;align-items:center;justify-content:start;background:transparent}
+.archive-nav>a:first-child{border-left:0}
+.archive-nav__group:last-child>summary{border-right:0}
+.archive-nav>a>span,.archive-nav__group>summary>span{grid-row:1/3;align-self:center;font-family:var(--display);font-size:.58rem;letter-spacing:.11em;color:#77633f}
+.archive-nav>a>strong,.archive-nav__group>summary>strong{font-size:.88rem;line-height:1;align-self:end;white-space:nowrap}
+.archive-nav>a>small,.archive-nav__group>summary>small{margin:1px 0 0;font-size:.48rem;line-height:1;align-self:start;color:#6b645c;white-space:nowrap}
+.archive-nav a:hover,.archive-nav__group>summary:hover,.archive-nav a.is-current{background:linear-gradient(180deg,rgba(87,39,42,.16),rgba(142,116,69,.045))}
+.archive-nav a.is-current{box-shadow:inset 0 -1px #8e7445}
+.archive-nav__group{position:static}
+.archive-mega{top:74px}
+.archive-search-button{width:40px;height:40px;margin:0;border-radius:50%;justify-self:end;background:rgba(142,116,69,.025);font-size:1.12rem}
+.brand-wordmark strong{letter-spacing:.08em}
+@media(max-width:1120px){.header-inner--archive{grid-template-columns:minmax(210px,1fr) auto 42px;gap:10px}.archive-nav>a,.archive-nav__group>summary{min-width:94px;padding-inline:10px}.archive-nav>a>small,.archive-nav__group>summary>small{display:none}.archive-nav>a,.archive-nav__group>summary{grid-template-rows:1fr}.archive-nav>a>span,.archive-nav__group>summary>span{grid-row:1}.archive-nav>a>strong,.archive-nav__group>summary>strong{align-self:center}}
+@media(max-width:900px){.archive-nav,.archive-search-button{display:none}.header-inner--archive{display:flex;height:68px}.menu-toggle--archive{display:flex;margin-left:auto}.archive-mega{top:68px}}

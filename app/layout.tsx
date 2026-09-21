@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { getSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://codex-nocturnum.example"),
+  metadataBase: new URL(getSiteUrl()),
   title: { default: "Codex Nocturnum — An Archive of Witchcraft, Ritual & Lore", template: "%s | Codex Nocturnum" },
   description: "A scholarly, atmospheric archive of historical witchcraft, folklore, ritual, botanical lore, divination and European folk traditions.",
   keywords: ["folklore", "witchcraft history", "European folklore", "herbarium", "ritual history", "divination history", "cultural archive"],

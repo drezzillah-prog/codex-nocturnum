@@ -148,7 +148,10 @@ export function ThresholdIntro() {
           {Array.from({ length: 7 }, (_, index) => (
             <i
               key={`beam-${index}`}
-              style={{ "--beam": index } as CSSProperties}
+              style={{
+                "--beam-top": `${index * 13}%`,
+                "--beam-width": `${100 - index * 9}%`,
+              } as CSSProperties}
             />
           ))}
         </div>
@@ -183,7 +186,14 @@ export function ThresholdIntro() {
           {Array.from({ length: 9 }, (_, index) => (
             <i
               key={`paper-${index}`}
-              style={{ "--paper": index } as CSSProperties}
+              style={{
+                "--paper-left": `${13 + index * 8.7}%`,
+                "--paper-top": `${20 + (index % 4) * 14}%`,
+                "--paper-angle": `${-23 + index * 7}deg`,
+                "--paper-delay": `${2.18 + index * 0.045}s`,
+                "--paper-dx": `${(index - 4) * 10}vw`,
+                "--paper-spin": `${120 + index * 33}deg`,
+              } as CSSProperties}
             />
           ))}
         </div>

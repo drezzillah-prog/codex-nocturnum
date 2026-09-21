@@ -72,7 +72,7 @@
 .threshold-particle--ash{
   background:#171513;
   box-shadow:
-    0 0 calc(var(--size) * 2) rgba(63,56,48,.5),
+    0 0 8px rgba(63,56,48,.5),
     0 0 10px rgba(0,0,0,.95);
   filter:blur(.15px);
 }
@@ -369,8 +369,8 @@
 .threshold-corridor__ceiling i{
   position:absolute;
   left:50%;
-  top:calc(var(--beam) * 13%);
-  width:calc(100% - var(--beam) * 9%);
+  top:var(--beam-top);
+  width:var(--beam-width);
   height:2px;
   transform:translateX(-50%);
   background:rgba(141,105,58,.12);
@@ -446,15 +446,15 @@
 }
 .threshold-papers i{
   position:absolute;
-  left:calc(13% + var(--paper) * 8.7%);
-  top:calc(20% + (var(--paper) % 4) * 14%);
+  left:var(--paper-left);
+  top:var(--paper-top);
   width:clamp(18px,2.3vw,34px);
   aspect-ratio:.72;
   background:#75654f;
   opacity:0;
   box-shadow:0 8px 16px rgba(0,0,0,.28);
-  transform:rotate(calc(-23deg + var(--paper) * 7deg)) translateZ(0);
-  animation:paperFly 1.75s calc(2.18s + var(--paper) * 45ms) cubic-bezier(.2,.6,.2,1) both;
+  transform:rotate(var(--paper-angle)) translateZ(0);
+  animation:paperFly 1.75s var(--paper-delay) cubic-bezier(.2,.6,.2,1) both;
 }
 .threshold-papers i:before{
   content:"";
@@ -544,7 +544,7 @@
 @keyframes paperFly{
   0%{opacity:0;transform:translate3d(0,10vh,0) rotate(-18deg) scale(.35)}
   20%{opacity:.72}
-  100%{opacity:0;transform:translate3d(calc((var(--paper) - 4) * 10vw),-34vh,0) rotate(calc(120deg + var(--paper) * 33deg)) scale(2.5)}
+  100%{opacity:0;transform:translate3d(var(--paper-dx),-34vh,0) rotate(var(--paper-spin)) scale(2.5)}
 }
 @keyframes vignetteOpen{
   0%{box-shadow:inset 0 0 180px 95px rgba(0,0,0,.97)}

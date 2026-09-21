@@ -1,205 +1,107 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useState } from "react";
 import { BrandSeal } from "./Ornaments";
 
-const SESSION_KEY = "codex-nocturnum-threshold-v1";
-const INTRO_DURATION = 4900;
-
-type ParticleStyle = CSSProperties & {
-  "--x"?: string;
-  "--y"?: string;
-  "--dx"?: string;
-  "--dy"?: string;
-  "--delay"?: string;
-  "--size"?: string;
-  "--spin"?: string;
-};
-
-function makeParticles(count: number, gold = false) {
-  return Array.from({ length: count }, (_, index) => {
-    const angle = ((index * 137.5 + (gold ? 19 : 0)) % 360) * (Math.PI / 180);
-    const radius = 18 + ((index * 29) % 54);
-    const x = 50 + Math.cos(angle) * (5 + ((index * 7) % 13));
-    const y = 49 + Math.sin(angle) * (3 + ((index * 11) % 9));
-    const dx = Math.cos(angle) * radius;
-    const dy = Math.sin(angle) * radius * 0.72 - 8;
-    const size = gold ? 1 + (index % 3) * 0.7 : 2 + (index % 5) * 1.4;
-
-    return {
-      "--x": `${x}%`,
-      "--y": `${y}%`,
-      "--dx": `${dx}vw`,
-      "--dy": `${dy}vh`,
-      "--delay": `${(index % 9) * 24}ms`,
-      "--size": `${size}px`,
-      "--spin": `${140 + (index % 7) * 61}deg`,
-    } satisfies ParticleStyle;
-  });
-}
-
-const ash = makeParticles(48);
-const gilt = makeParticles(22, true);
+const SESSION_KEY = "codex-nocturnum-threshold-v2";
+const FULL_DURATION = 5600;
 
 export function ThresholdIntro() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const forceReplay = new URLSearchParams(window.location.search).get("threshold") === "1";
+    const replay = new URLSearchParams(window.location.search).get("threshold") === "1";
 
     try {
-      if (!forceReplay && sessionStorage.getItem(SESSION_KEY) === "seen") {
+      if (!replay && sessionStorage.getItem(SESSION_KEY) === "seen") {
         setVisible(false);
         return;
       }
-      if (!forceReplay) sessionStorage.setItem(SESSION_KEY, "seen");
+      if (!replay) sessionStorage.setItem(SESSION_KEY, "seen");
     } catch {
-      // Session storage can be unavailable in hardened/private contexts.
+      // Continue without session persistence when storage is unavailable.
     }
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const previousOverflow = document.documentElement.style.overflow;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const oldOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
 
-    const delay = reduceMotion ? 650 : INTRO_DURATION;
     const timer = window.setTimeout(() => {
       setVisible(false);
-      document.documentElement.style.overflow = previousOverflow;
-    }, delay);
+      document.documentElement.style.overflow = oldOverflow;
+    }, reduced ? 700 : FULL_DURATION);
 
     return () => {
       window.clearTimeout(timer);
-      document.documentElement.style.overflow = previousOverflow;
+      document.documentElement.style.overflow = oldOverflow;
     };
   }, []);
 
   if (!visible) return null;
 
-  const skip = () => {
+  const close = () => {
     setVisible(false);
     document.documentElement.style.overflow = "";
   };
 
   return (
-    <div
-      className="threshold-intro"
-      role="dialog"
-      aria-label="Entering the Codex Nocturnum archive"
-    >
-      <button
-        className="threshold-skip"
-        type="button"
-        onClick={skip}
-      >
-        Skip threshold
+    <div className="threshold-v2" role="dialog" aria-label="Entering Codex Nocturnum">
+      <button className="threshold-v2__skip" type="button" onClick={close}>
+        Skip
       </button>
 
-      <div className="threshold-darkness" aria-hidden="true" />
+      <div className="threshold-v2__black" aria-hidden="true" />
 
-      <div className="threshold-dust" aria-hidden="true">
-        {ash.map((style, index) => (
-          <i
-            className="threshold-particle threshold-particle--ash"
-            style={style}
-            key={`ash-${index}`}
-          />
-        ))}
-        {gilt.map((style, index) => (
-          <i
-            className="threshold-particle threshold-particle--gilt"
-            style={style}
-            key={`gilt-${index}`}
-          />
+      <div className="threshold-v2__dust" aria-hidden="true">
+        {Array.from({ length: 28 }, (_, index) => (
+          <i key={index} />
         ))}
       </div>
 
-      <div className="threshold-gate-scene" aria-hidden="true">
-        <div className="threshold-arch">
-          <span className="threshold-arch__stone threshold-arch__stone--1" />
-          <span className="threshold-arch__stone threshold-arch__stone--2" />
-          <span className="threshold-arch__stone threshold-arch__stone--3" />
-        </div>
-
-        <div className="threshold-gate">
-          <div className="threshold-door threshold-door--left">
-            <span className="threshold-door__panel threshold-door__panel--top" />
-            <span className="threshold-door__panel threshold-door__panel--bottom" />
-            <span className="threshold-hinge threshold-hinge--one" />
-            <span className="threshold-hinge threshold-hinge--two" />
+      <div className="threshold-v2__gate-stage" aria-hidden="true">
+        <div className="threshold-v2__stone-arch" />
+        <div className="threshold-v2__gate">
+          <div className="threshold-v2__door threshold-v2__door--left">
+            <b />
+            <span />
+            <span />
           </div>
-
-          <div className="threshold-door threshold-door--right">
-            <span className="threshold-door__panel threshold-door__panel--top" />
-            <span className="threshold-door__panel threshold-door__panel--bottom" />
-            <span className="threshold-hinge threshold-hinge--one" />
-            <span className="threshold-hinge threshold-hinge--two" />
+          <div className="threshold-v2__door threshold-v2__door--right">
+            <b />
+            <span />
+            <span />
           </div>
-
-          <div className="threshold-gate__seal">
+          <div className="threshold-v2__seal">
             <BrandSeal />
             <strong>CODEX NOCTURNUM</strong>
-            <span>ARCHIVUM · ADITUS</span>
+            <small>ARCHIVUM · ADITUS</small>
           </div>
         </div>
       </div>
 
-      <div className="threshold-corridor" aria-hidden="true">
-        <div className="threshold-corridor__ceiling">
+      <div className="threshold-v2__corridor" aria-hidden="true">
+        <div className="threshold-v2__corridor-light" />
+        <div className="threshold-v2__corridor-left">
           {Array.from({ length: 7 }, (_, index) => (
-            <i
-              key={`beam-${index}`}
-              style={{
-                "--beam-top": `${index * 13}%`,
-                "--beam-width": `${100 - index * 9}%`,
-              } as CSSProperties}
-            />
-          ))}
-        </div>
-
-        <div className="threshold-wall threshold-wall--left">
-          {Array.from({ length: 8 }, (_, index) => (
-            <div className="threshold-shelf" key={`left-${index}`}>
-              <span /><span /><span /><span /><span /><span />
+            <div className="threshold-v2__shelf" key={index}>
+              <i /><i /><i /><i /><i />
             </div>
           ))}
         </div>
-
-        <div className="threshold-wall threshold-wall--right">
-          {Array.from({ length: 8 }, (_, index) => (
-            <div className="threshold-shelf" key={`right-${index}`}>
-              <span /><span /><span /><span /><span /><span />
+        <div className="threshold-v2__corridor-right">
+          {Array.from({ length: 7 }, (_, index) => (
+            <div className="threshold-v2__shelf" key={index}>
+              <i /><i /><i /><i /><i />
             </div>
           ))}
         </div>
-
-        <div className="threshold-floor">
-          {Array.from({ length: 10 }, (_, index) => (
-            <i key={`floor-${index}`} />
-          ))}
-        </div>
-
-        <div className="threshold-endlight">
-          <span>CODEX NOCTURNUM</span>
-        </div>
-
-        <div className="threshold-papers">
-          {Array.from({ length: 9 }, (_, index) => (
-            <i
-              key={`paper-${index}`}
-              style={{
-                "--paper-left": `${13 + index * 8.7}%`,
-                "--paper-top": `${20 + (index % 4) * 14}%`,
-                "--paper-angle": `${-23 + index * 7}deg`,
-                "--paper-delay": `${2.18 + index * 0.045}s`,
-                "--paper-dx": `${(index - 4) * 10}vw`,
-                "--paper-spin": `${120 + index * 33}deg`,
-              } as CSSProperties}
-            />
-          ))}
+        <div className="threshold-v2__floor" />
+        <div className="threshold-v2__papers">
+          {Array.from({ length: 6 }, (_, index) => <i key={index} />)}
         </div>
       </div>
 
-      <div className="threshold-vignette" aria-hidden="true" />
+      <div className="threshold-v2__iris" aria-hidden="true" />
     </div>
   );
 }

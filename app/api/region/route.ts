@@ -5,6 +5,9 @@ import type { PriceRegion } from "@/data/products";
 function toRegion(country: string | null): PriceRegion {
   if (country === "RO") return "RO";
   if (country === "US") return "US";
+  if (country === "GB") return "UK";
+  if (country === "CA") return "CA";
+  if (country === "AU") return "AU";
   return "EU";
 }
 

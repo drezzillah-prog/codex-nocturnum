@@ -10,13 +10,21 @@ type PricingContextValue = {
 };
 
 const PricingContext = createContext<PricingContextValue | null>(null);
-const STORAGE_KEY = "codex-nocturnum-price-region";
+const STORAGE_KEY = "codex-nocturnum-price-region-v2";
+const validRegions: PriceRegion[] = ["RO", "EU", "US", "UK", "CA", "AU"];
+
+function isRegion(value: string | null): value is PriceRegion {
+  return value !== null && validRegions.includes(value as PriceRegion);
+}
 
 function fallbackRegion(): PriceRegion {
   if (typeof navigator === "undefined") return "EU";
   const locale = navigator.language.toLowerCase();
   if (locale.startsWith("ro")) return "RO";
   if (locale === "en-us" || locale.endsWith("-us")) return "US";
+  if (locale === "en-gb" || locale.endsWith("-gb")) return "UK";
+  if (locale === "en-ca" || locale.endsWith("-ca") || locale === "fr-ca") return "CA";
+  if (locale === "en-au" || locale.endsWith("-au")) return "AU";
   return "EU";
 }
 
@@ -25,8 +33,8 @@ export function PricingProvider({ children }: { children: ReactNode }) {
   const [source, setSource] = useState<"automatic" | "manual">("automatic");
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY) as PriceRegion | null;
-    if (saved === "RO" || saved === "EU" || saved === "US") {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (isRegion(saved)) {
       setRegionState(saved);
       setSource("manual");
       return;
@@ -36,8 +44,8 @@ export function PricingProvider({ children }: { children: ReactNode }) {
 
     void fetch("/api/region", { cache: "no-store" })
       .then((response) => response.ok ? response.json() : Promise.reject())
-      .then((data: { region?: PriceRegion }) => {
-        if (data.region === "RO" || data.region === "EU" || data.region === "US") setRegionState(data.region);
+      .then((data: { region?: string }) => {
+        if (isRegion(data.region ?? null)) setRegionState(data.region as PriceRegion);
       })
       .catch(() => undefined);
   }, []);

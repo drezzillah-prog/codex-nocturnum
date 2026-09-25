@@ -2,7 +2,22 @@ export type Language = "ro" | "en" | "fr" | "de" | "it";
 
 export const supportedLanguages: Language[] = ["ro", "en", "fr", "de", "it"];
 
-export const ui = {
+export type UiCopy = {
+  nav: { codex:string; cabinet:string; intentions:string; bespoke:string; archive:string; search:string };
+  marketAuto:string;
+  heroEyebrow:string; heroTitleA:string; heroTitleB:string; heroSubtitle:string; heroLead:string;
+  enterCabinet:string; openCodex:string; portalTitle:string; portalCabinet:string; portalCabinetText:string;
+  portalCodex:string; portalCodexText:string; portalIntentions:string; portalIntentionsText:string;
+  portalBespoke:string; portalBespokeText:string; signature:string; signatureLead:string; whyTitle:string; whyText:string;
+  cabinetTitle:string; cabinetLead:string; tabSignature:string; tabCandles:string; tabApothecary:string;
+  tabDivination:string; tabObjects:string; tabNext:string; from:string; madeToOrder:string; physical:string;
+  commission:string; details:string; production:string; days:string; nextAccessions:string; nextAccessionsText:string;
+  intentionsTitle:string; intentionsLead:string; bespokeTitle:string; bespokeLead:string; stepObject:string;
+  stepIntention:string; stepAssociation:string; stepFinish:string; stepRecord:string; beginCommission:string;
+  archiveRecord:string; archiveRecordText:string; autoLanguageNote:string;
+};
+
+export const ui: Record<Language, UiCopy> = {
   ro: {
     nav: { codex: "Codexul", cabinet: "Cabinetul", intentions: "După intenție", bespoke: "Bespoke", archive: "Arhiva", search: "Caută" },
     marketAuto: "Piață detectată automat",

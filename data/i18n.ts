@@ -273,10 +273,8 @@ export const ui = {
     archiveRecordText: "Un pezzo personalizzato riceve una scheda con le tue scelte, la data di ingresso e il numero di esemplare.",
     autoLanguageNote: "Lingua e valuta vengono impostate automaticamente in base al mercato. La valuta non può essere modificata manualmente.",
   },
-} as const;
-
-export type UiCopy = (typeof ui)[Language];
+};
 
 export function getUi(language: Language): UiCopy {
-  return ui[language] as UiCopy;
+  return ui[language];
 }

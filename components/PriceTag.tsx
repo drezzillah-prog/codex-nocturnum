@@ -1,7 +1,7 @@
 "use client";
 
 import type { Product } from "@/data/products";
-import { usePricing } from "./PricingProvider";
+import { useMarket } from "./PricingProvider";
 
 const formatterByRegion = {
   RO: new Intl.NumberFormat("ro-RO", { style: "currency", currency: "RON", maximumFractionDigits: 0 }),
@@ -13,6 +13,6 @@ const formatterByRegion = {
 } as const;
 
 export function PriceTag({ product }: { product: Product }) {
-  const { region } = usePricing();
+  const { region } = useMarket();
   return <span className="price-tag">{formatterByRegion[region].format(product.prices[region])}</span>;
 }

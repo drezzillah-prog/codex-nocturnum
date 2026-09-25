@@ -2,66 +2,75 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { PriceRegion } from "@/data/products";
+import type { Language } from "@/data/i18n";
 
-type PricingContextValue = {
+type MarketContextValue = {
   region: PriceRegion;
-  setRegion: (region: PriceRegion) => void;
-  source: "automatic" | "manual";
+  language: Language;
+  currency: string;
+  country: string | null;
+  loading: boolean;
 };
 
-const PricingContext = createContext<PricingContextValue | null>(null);
-const STORAGE_KEY = "codex-nocturnum-price-region-v2";
-const validRegions: PriceRegion[] = ["RO", "EU", "US", "UK", "CA", "AU"];
+const MarketContext = createContext<MarketContextValue | null>(null);
 
-function isRegion(value: string | null): value is PriceRegion {
-  return value !== null && validRegions.includes(value as PriceRegion);
-}
+const currencyByRegion: Record<PriceRegion, string> = {
+  RO: "RON",
+  EU: "EUR",
+  US: "USD",
+  UK: "GBP",
+  CA: "CAD",
+  AU: "AUD",
+};
 
-function fallbackRegion(): PriceRegion {
-  if (typeof navigator === "undefined") return "EU";
-  const locale = navigator.language.toLowerCase();
-  if (locale.startsWith("ro")) return "RO";
-  if (locale === "en-us" || locale.endsWith("-us")) return "US";
-  if (locale === "en-gb" || locale.endsWith("-gb")) return "UK";
-  if (locale === "en-ca" || locale.endsWith("-ca") || locale === "fr-ca") return "CA";
-  if (locale === "en-au" || locale.endsWith("-au")) return "AU";
-  return "EU";
+function browserLanguage(): Language {
+  if (typeof navigator === "undefined") return "en";
+  const code = navigator.language.toLowerCase();
+  if (code.startsWith("ro")) return "ro";
+  if (code.startsWith("fr")) return "fr";
+  if (code.startsWith("de")) return "de";
+  if (code.startsWith("it")) return "it";
+  return "en";
 }
 
 export function PricingProvider({ children }: { children: ReactNode }) {
-  const [region, setRegionState] = useState<PriceRegion>("EU");
-  const [source, setSource] = useState<"automatic" | "manual">("automatic");
+  const [region, setRegion] = useState<PriceRegion>("EU");
+  const [language, setLanguage] = useState<Language>("en");
+  const [country, setCountry] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (isRegion(saved)) {
-      setRegionState(saved);
-      setSource("manual");
-      return;
-    }
-
-    setRegionState(fallbackRegion());
+    setLanguage(browserLanguage());
 
     void fetch("/api/region", { cache: "no-store" })
       .then((response) => response.ok ? response.json() : Promise.reject())
-      .then((data: { region?: string }) => {
-        if (isRegion(data.region ?? null)) setRegionState(data.region as PriceRegion);
+      .then((data: { region?: PriceRegion; language?: Language; country?: string | null }) => {
+        if (data.region) setRegion(data.region);
+        if (data.language) setLanguage(data.language);
+        setCountry(data.country ?? null);
       })
-      .catch(() => undefined);
+      .catch(() => undefined)
+      .finally(() => setLoading(false));
   }, []);
 
-  const setRegion = (nextRegion: PriceRegion) => {
-    setRegionState(nextRegion);
-    setSource("manual");
-    window.localStorage.setItem(STORAGE_KEY, nextRegion);
-  };
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
-  const value = useMemo(() => ({ region, setRegion, source }), [region, source]);
-  return <PricingContext.Provider value={value}>{children}</PricingContext.Provider>;
+  const value = useMemo(
+    () => ({ region, language, currency: currencyByRegion[region], country, loading }),
+    [region, language, country, loading],
+  );
+
+  return <MarketContext.Provider value={value}>{children}</MarketContext.Provider>;
+}
+
+export function useMarket() {
+  const value = useContext(MarketContext);
+  if (!value) throw new Error("useMarket must be used inside PricingProvider");
+  return value;
 }
 
 export function usePricing() {
-  const value = useContext(PricingContext);
-  if (!value) throw new Error("usePricing must be used inside PricingProvider");
-  return value;
+  return useMarket();
 }

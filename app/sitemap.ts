@@ -4,7 +4,7 @@ import { getSiteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
-  const staticRoutes = ["", "/codex", "/archive", "/search", "/about", "/sources"].map(route => ({
+  const staticRoutes = ["", "/codex", "/shop", "/intentions", "/bespoke", "/archive", "/search", "/about", "/sources"].map(route => ({
     url: `${base}${route}`,
     changeFrequency: "monthly" as const,
     priority: route === "" ? 1 : .7,

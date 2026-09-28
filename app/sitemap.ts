@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { entries, libers } from "@/data/codex";
+import { products } from "@/data/products";
 import { getSiteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -21,6 +22,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/archive/${entry.slug}`,
       changeFrequency: "monthly" as const,
       priority: .6,
+    })),
+    ...products.map(product => ({
+      url: `${base}/shop/${encodeURIComponent(product.catalogue)}`,
+      changeFrequency: "monthly" as const,
+      priority: .75,
     })),
   ];
 }

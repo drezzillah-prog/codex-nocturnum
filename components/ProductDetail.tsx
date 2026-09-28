@@ -4,7 +4,8 @@ import Link from "next/link";
 import { PriceTag } from "./PriceTag";
 import { useMarket } from "./PricingProvider";
 import { getUi } from "@/data/i18n";
-import { intentionLabels, type Product } from "@/data/products";\nimport { BotanicalCandleCollection } from "./BotanicalCandleCollection";
+import { intentionLabels, type Product } from "@/data/products";
+import { BotanicalCandleCollection } from "./BotanicalCandleCollection";
 
 const candleStudies = [
   ["Hecate Threshold", "Sculpted devotional form"],

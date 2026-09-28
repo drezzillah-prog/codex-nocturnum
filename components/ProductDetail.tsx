@@ -6,6 +6,19 @@ import { useMarket } from "./PricingProvider";
 import { getUi } from "@/data/i18n";
 import { intentionLabels, type Product } from "@/data/products";
 
+const candleStudies = [
+  ["Hecate Threshold", "Sculpted devotional form"],
+  ["Lunar Priestess", "Sculpted lunar form"],
+  ["Rose Oracle", "Sculpted floral form"],
+  ["Solar Seer", "Sculpted solar form"],
+  ["Pomegranate Underworld", "Sculpted underworld form"],
+  ["Black Moon Phases", "Symbolic pillar"],
+  ["Ivory Celestial", "Symbolic pillar"],
+  ["Oxblood Oracle", "Symbolic pillar"],
+  ["Forest Moon", "Botanical-celestial pillar"],
+  ["Cosmic Orbit", "Marbled celestial pillar"],
+] as const;
+
 export function ProductDetail({ product }: { product: Product }) {
   const { language, currency } = useMarket();
   const copy = getUi(language);
@@ -46,6 +59,25 @@ export function ProductDetail({ product }: { product: Product }) {
       </section>
 
       <section className="product-detail-v6__tabs page-width">
+        {(product.catalogue === "CN-IV-DEV-001" || product.catalogue === "CN-IV-PIL-002") && (
+          <div className="product-detail-v6__section candle-study">
+            <div className="candle-study__intro">
+              <p className="eyebrow">FORMae · DIVINATION CANDLES</p>
+              <h2>Sculpted by hand, or kept deliberately spare.</h2>
+              <p>Ten visual directions from the Codex candle atelier. Sculpted figures, lunar geometry, dark wax, ivory wax and restrained metallic detailing can be adapted to the client&apos;s ritual intention and devotional association.</p>
+            </div>
+            <div className="candle-study__grid">
+              {candleStudies.map(([name, kind], index) => (
+                <article key={name} className="candle-study__card">
+                  <div className={`candle-study__image candle-study__image--${index}`} role="img" aria-label={name} />
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{name}</strong>
+                  <small>{kind}</small>
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="product-detail-v6__section">
           <p className="eyebrow">CUSTOMISATIO</p>
           <h2>Make it yours.</h2>

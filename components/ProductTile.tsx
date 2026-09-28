@@ -28,8 +28,8 @@ export function ProductTile({ product, featured = false }: { product: Product; f
       </div>
       <div className="product-tile__footer">
         <div><small>{copy.from}</small><PriceTag product={product} /></div>
-        <Link href={`/bespoke?product=${encodeURIComponent(product.catalogue)}`}>
-          {product.format === "Made to order" ? copy.commission : copy.details} →
+        <Link href={`/shop/${encodeURIComponent(product.catalogue)}`}>
+          {copy.details} →
         </Link>
       </div>
     </article>

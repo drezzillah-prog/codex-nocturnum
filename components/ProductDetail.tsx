@@ -4,7 +4,7 @@ import Link from "next/link";
 import { PriceTag } from "./PriceTag";
 import { useMarket } from "./PricingProvider";
 import { getUi } from "@/data/i18n";
-import { intentionLabels, type Product } from "@/data/products";
+import { intentionLabels, type Product } from "@/data/products";\nimport { BotanicalCandleCollection } from "./BotanicalCandleCollection";
 
 const candleStudies = [
   ["Hecate Threshold", "Sculpted devotional form"],
@@ -78,6 +78,7 @@ export function ProductDetail({ product }: { product: Product }) {
             </div>
           </div>
         )}
+        {(product.catalogue === "CN-IV-DEV-001" || product.catalogue === "CN-IV-PIL-002") && <BotanicalCandleCollection />}
         <div className="product-detail-v6__section">
           <p className="eyebrow">CUSTOMISATIO</p>
           <h2>Make it yours.</h2>

@@ -87,6 +87,7 @@ const addOns:AddOn[] = [
   {key:"seal",label:"Personal archive seal",prices:{RO:25,EU:6,US:7,UK:5,CA:9,AU:10}},
   {key:"dressing",label:"Botanical Dressing Sachet",prices:{RO:19,EU:4,US:5,UK:4,CA:7,AU:8},candleOnly:true},
   {key:"oil",label:"Matching Ritual Oil · 10 ml",prices:{RO:49,EU:12,US:14,UK:11,CA:19,AU:21},candleOnly:true},
+  {key:"botanical",label:"Botanical Signature Finish",prices:{RO:40,EU:9,US:10,UK:8,CA:13,AU:13},candleOnly:true},
 ];
 
 export function BespokeBuilder() {
@@ -95,6 +96,7 @@ export function BespokeBuilder() {
   const copy = getUi(language);
   const [step,setStep] = useState<Step>(0);
   const initial = params.get("product");
+  const initialVariant = params.get("variant");
   const [productCode,setProductCode] = useState(initial && products.some(p=>p.catalogue===initial) ? initial : products[0].catalogue);
   const [intention,setIntention] = useState<IntentionKey>("protection");
   const [association,setAssociation] = useState(associations[0]);
@@ -108,10 +110,11 @@ export function BespokeBuilder() {
   }, [initial]);
 
   useEffect(() => {
-    setDetails({});
-    setExtras([]);
+    const botanicalSelected = Boolean(initialVariant) && (productCode === "CN-IV-PIL-002" || productCode === "CN-IV-DEV-001");
+    setDetails(botanicalSelected ? {"Botanical direction": initialVariant ?? ""} : {});
+    setExtras(botanicalSelected ? ["botanical"] : []);
     setCopied(false);
-  }, [productCode]);
+  }, [productCode, initialVariant]);
 
   const product = useMemo(() => products.find(p=>p.catalogue===productCode) ?? products[0],[productCode]);
   const groups = detailGroups[product.catalogue] ?? [];

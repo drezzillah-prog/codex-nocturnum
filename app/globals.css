@@ -275,3 +275,23 @@ body{background:#090807;color:var(--ivory);font-family:var(--body)}
 @media(max-width:1150px){.divine-candles__grid{grid-template-columns:repeat(3,1fr)}.divine-candles__intro{grid-template-columns:1fr}}
 @media(max-width:700px){.divine-candles{padding:20px!important}.divine-candles__grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.divine-candles__grid{grid-template-columns:1fr}}
+
+
+/* Approved devotional atelier studies — exact retained imagery */
+.divine-approved{margin-top:18px;padding-top:18px;border-top:1px solid rgba(142,116,69,.14)}
+.divine-approved__intro{display:grid;grid-template-columns:190px 1fr;gap:26px;align-items:start;margin-bottom:14px}
+.divine-approved__intro>p:last-child{margin:0;color:#81796f;max-width:760px}
+.divine-approved__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.divine-approved__card{display:grid;grid-template-columns:26px 1fr;gap:3px 7px;padding:8px;border:1px solid rgba(224,211,185,.08);background:#0c0a09}
+.divine-approved__image{grid-column:1/3;aspect-ratio:4/5;background-repeat:no-repeat;border:1px solid rgba(142,116,69,.15);background-color:#090807}
+.divine-approved__image--alt-0,.divine-approved__image--alt-1,.divine-approved__image--alt-2{background-image:url("/images/divine-alt-sprite.webp");background-size:300% 100%}
+.divine-approved__image--alt-0{background-position:0% 0%}
+.divine-approved__image--alt-1{background-position:50% 0%}
+.divine-approved__image--alt-2{background-position:100% 0%}
+.divine-approved__image--main-isis{background-image:url("/images/divine-candles-sprite.webp");background-size:500% 200%;background-position:100% 100%}
+.divine-approved__card>span{color:#796643;font-size:.48rem;letter-spacing:.1em}
+.divine-approved__card h3{margin:0;font-family:var(--display);font-weight:500;color:#d8ccb8;font-size:1.05rem}
+.divine-approved__card small{grid-column:2;color:#6e675f;font-size:.52rem}
+.divine-approved__card>a{grid-column:1/3;margin-top:9px;padding-top:8px;border-top:1px solid rgba(224,211,185,.07);color:#aa8d5a;font-size:.6rem}
+@media(max-width:900px){.divine-approved__grid{grid-template-columns:1fr 1fr}.divine-approved__intro{grid-template-columns:1fr}}
+@media(max-width:480px){.divine-approved__grid{grid-template-columns:1fr}}

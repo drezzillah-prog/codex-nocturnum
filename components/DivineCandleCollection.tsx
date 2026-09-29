@@ -141,7 +141,14 @@ const studies:DivineStudy[]=[
   }
 ];
 
-const sectionCopy:Record<Language,{eyebrow:string;title:string;intro:string;open:string;commission:string;alt:string;note:string}> = {
+const approvedStudies = [
+  {name:"Selene", label:"Lunar Atelier Study", source:"alt", index:0},
+  {name:"Isis", label:"Temple Atelier Study I", source:"alt", index:2},
+  {name:"Isis", label:"Temple Atelier Study II", source:"main", index:9},
+  {name:"Artemis", label:"Woodland Atelier Study", source:"alt", index:1},
+] as const;
+
+const sectionCopy:Record<Language,{eyebrow:string;title:string;intro:string;open:string;commission:string;alt:string;approved:string;approvedLead:string;note:string}> = {
   en:{
     eyebrow:"DEUS · DEA · DEVOTIONAL FORMS",
     title:"Choose the figure that calls to you.",
@@ -149,6 +156,8 @@ const sectionCopy:Record<Language,{eyebrow:string;title:string;intro:string;open
     open:"Open archive note",
     commission:"Commission this form",
     alt:"Alternate atelier study",
+    approved:"Approved atelier studies",
+    approvedLead:"Four additional forms retained from the Codex atelier — not replacements, but distinct sculptural directions available for bespoke commissions.",
     note:"Deity names and correspondences are presented as symbolic or devotional associations. Designs are adapted respectfully to the chosen tradition without treating different cultures as one historical system."
   },
   ro:{
@@ -158,6 +167,8 @@ const sectionCopy:Record<Language,{eyebrow:string;title:string;intro:string;open
     open:"Deschide nota de arhivă",
     commission:"Comandă această formă",
     alt:"Studiu alternativ de atelier",
+    approved:"Studii de atelier aprobate",
+    approvedLead:"Patru forme suplimentare păstrate din atelierul Codex — nu înlocuiri, ci direcții sculpturale distincte disponibile pentru comenzi bespoke.",
     note:"Numele zeităților și corespondențele sunt prezentate ca asocieri simbolice sau devoționale. Designurile sunt adaptate cu respect pentru tradiția aleasă, fără a amesteca mitologii diferite într-un singur sistem istoric."
   },
   fr:{
@@ -167,6 +178,8 @@ const sectionCopy:Record<Language,{eyebrow:string;title:string;intro:string;open
     open:"Ouvrir la note d’archive",
     commission:"Commander cette forme",
     alt:"Étude alternative de l’atelier",
+    approved:"Études d’atelier approuvées",
+    approvedLead:"Quatre formes supplémentaires conservées dans l’atelier Codex — des directions sculpturales distinctes disponibles sur commande.",
     note:"Les divinités et correspondances sont présentées comme des associations symboliques ou dévotionnelles, avec respect pour la tradition choisie."
   },
   de:{
@@ -176,6 +189,8 @@ const sectionCopy:Record<Language,{eyebrow:string;title:string;intro:string;open
     open:"Archivnotiz öffnen",
     commission:"Diese Form beauftragen",
     alt:"Alternative Atelierstudie",
+    approved:"Freigegebene Atelierstudien",
+    approvedLead:"Vier zusätzliche Formen aus dem Codex-Atelier — eigenständige skulpturale Richtungen für individuelle Aufträge.",
     note:"Gottheiten und Zuordnungen werden als symbolische oder devotional geprägte Assoziationen dargestellt und respektvoll an die gewählte Tradition angepasst."
   },
   it:{
@@ -185,6 +200,8 @@ const sectionCopy:Record<Language,{eyebrow:string;title:string;intro:string;open
     open:"Apri la nota d’archivio",
     commission:"Commissiona questa forma",
     alt:"Studio alternativo dell’atelier",
+    approved:"Studi d’atelier approvati",
+    approvedLead:"Quattro forme aggiuntive conservate nell’atelier Codex — direzioni scultoree distinte disponibili su commissione.",
     note:"Divinità e corrispondenze sono presentate come associazioni simboliche o devozionali e adattate con rispetto alla tradizione scelta."
   }
 };
@@ -221,6 +238,29 @@ export function DivineCandleCollection(){
           </article>
         ))}
       </div>
+
+      <section className="divine-approved">
+        <div className="divine-approved__intro">
+          <p className="eyebrow">{copy.approved}</p>
+          <p>{copy.approvedLead}</p>
+        </div>
+        <div className="divine-approved__grid">
+          {approvedStudies.map((study,index)=>(
+            <article className="divine-approved__card" key={`${study.name}-${study.label}`}>
+              <div
+                className={`divine-approved__image ${study.source === "alt" ? `divine-approved__image--alt-${study.index}` : "divine-approved__image--main-isis"}`}
+                role="img"
+                aria-label={`${study.name} — ${study.label}`}
+              />
+              <span>{String(index+1).padStart(2,"0")}</span>
+              <h3>{study.name}</h3>
+              <small>{study.label}</small>
+              <Link href={`/bespoke?product=CN-IV-DEV-001&association=${encodeURIComponent(study.name)}`}>{copy.commission} →</Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <p className="divine-candles__note">{copy.note}</p>
     </div>
   );

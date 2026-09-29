@@ -5,7 +5,7 @@ import { PriceTag } from "./PriceTag";
 import { useMarket } from "./PricingProvider";
 import { getUi } from "@/data/i18n";
 import { intentionLabels, type Product } from "@/data/products";
-import { BotanicalCandleCollection } from "./BotanicalCandleCollection";
+import { BotanicalCandleCollection } from "./BotanicalCandleCollection";\nimport { DivineCandleCollection } from "./DivineCandleCollection";
 
 const candleStudies = [
   ["Hecate Threshold", "Sculpted devotional form"],
@@ -23,17 +23,32 @@ const candleStudies = [
 export function ProductDetail({ product }: { product: Product }) {
   const { language, currency } = useMarket();
   const copy = getUi(language);
+  const isCandle = product.catalogue === "CN-IV-DEV-001" || product.catalogue === "CN-IV-PIL-002";
+  const candleCopy = {
+    ro:{eyebrow:"ATELIERUL DE LUMÂNĂRI · FORME RITUALICE",title:"Alege forma care îți vorbește.",body:"De la figuri devoționale sculptate la pillars lunare mai sobre, fiecare piesă poate fi adaptată prin culoare, simboluri, parfum și finisaj în funcție de intenția aleasă."},
+    en:{eyebrow:"CANDLE ATELIER · RITUAL FORMS",title:"Choose the form that speaks to you.",body:"From sculpted devotional figures to restrained lunar pillars, each piece can be adapted through colour, symbolism, fragrance and finish around the chosen intention."},
+    fr:{eyebrow:"ATELIER DE BOUGIES · FORMES RITUELLES",title:"Choisissez la forme qui vous parle.",body:"Des figures dévotionnelles sculptées aux piliers lunaires plus sobres, chaque pièce peut être adaptée par la couleur, les symboles, le parfum et la finition."},
+    de:{eyebrow:"KERZENATELIER · RITUALFORMEN",title:"Wähle die Form, die dich anspricht.",body:"Von skulpturalen Andachtsfiguren bis zu zurückhaltenden Mondkerzen kann jedes Stück in Farbe, Symbolik, Duft und Finish angepasst werden."},
+    it:{eyebrow:"ATELIER DI CANDELE · FORME RITUALI",title:"Scegli la forma che ti parla.",body:"Dalle figure devozionali scolpite ai pillar lunari più essenziali, ogni pezzo può essere personalizzato attraverso colore, simboli, profumo e finitura."}
+  }[language];
 
   return (
     <div className="product-detail-v6">
       <section className="product-detail-v6__hero page-width">
         <div className="product-detail-v6__visual">
-          <div className="product-detail-v6__image-slot">
-            <span>{product.catalogue}</span>
-            <strong>{product.name}</strong>
-            <small>ARCHIVE OBJECT · IMAGE PLATE</small>
-          </div>
-          <p>Primary product photography will be inserted here in the approved realistic Codex style.</p>
+          {isCandle ? (
+            <div
+              className={`product-detail-v6__hero-photo ${product.catalogue === "CN-IV-DEV-001" ? "product-detail-v6__hero-photo--devotional" : "product-detail-v6__hero-photo--pillar"}`}
+              role="img"
+              aria-label={product.name}
+            />
+          ) : (
+            <div className="product-detail-v6__image-slot">
+              <span>{product.catalogue}</span>
+              <strong>{product.name}</strong>
+              <small>CODEX NOCTURNUM · ACCESSION</small>
+            </div>
+          )}
         </div>
 
         <div className="product-detail-v6__copy">
@@ -63,9 +78,9 @@ export function ProductDetail({ product }: { product: Product }) {
         {(product.catalogue === "CN-IV-DEV-001" || product.catalogue === "CN-IV-PIL-002") && (
           <div className="product-detail-v6__section candle-study">
             <div className="candle-study__intro">
-              <p className="eyebrow">FORMae · DIVINATION CANDLES</p>
-              <h2>Sculpted by hand, or kept deliberately spare.</h2>
-              <p>Ten visual directions from the Codex candle atelier. Sculpted figures, lunar geometry, dark wax, ivory wax and restrained metallic detailing can be adapted to the client&apos;s ritual intention and devotional association.</p>
+              <p className="eyebrow">{candleCopy.eyebrow}</p>
+              <h2>{candleCopy.title}</h2>
+              <p>{candleCopy.body}</p>
             </div>
             <div className="candle-study__grid">
               {candleStudies.map(([name, kind], index) => (
@@ -79,7 +94,8 @@ export function ProductDetail({ product }: { product: Product }) {
             </div>
           </div>
         )}
-        {(product.catalogue === "CN-IV-DEV-001" || product.catalogue === "CN-IV-PIL-002") && <BotanicalCandleCollection />}
+        {isCandle && <DivineCandleCollection />}
+        {isCandle && <BotanicalCandleCollection />}
         <div className="product-detail-v6__section">
           <p className="eyebrow">CUSTOMISATIO</p>
           <h2>Make it yours.</h2>

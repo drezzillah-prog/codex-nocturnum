@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 import Link from "next/link";
 import { useMarket } from "./PricingProvider";
 import type { PriceRegion } from "@/data/products";
@@ -114,7 +112,7 @@ export function BotanicalCandleCollection() {
       <div className="botanical-candles__grid">
         {studies.map((study,index)=>(
           <article className="botanical-card" key={study.slug}>
-            <Image className="botanical-card__image" src={`/images/botanical/${study.slug}.webp`} alt={`${study.name} botanical ritual candle`} width={200} height={250} />
+            <div className={`botanical-card__image botanical-card__image--${index}`} role="img" aria-label={`${study.name} botanical ritual candle`} />
             <div className="botanical-card__head">
               <span>{String(index+1).padStart(2,"0")}</span>
               <div><h3>{study.name}</h3><strong>{formatMoney(region,signaturePrice[region])}</strong></div>

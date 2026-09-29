@@ -238,3 +238,16 @@ body{background:#090807;color:var(--ivory);font-family:var(--body)}
 @media(max-width:1150px){.botanical-candles__grid{grid-template-columns:repeat(3,1fr)}.botanical-candles__intro{grid-template-columns:1fr}}
 @media(max-width:700px){.botanical-candles{padding:20px!important}.botanical-candles__grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.botanical-candles__grid{grid-template-columns:1fr}}
+
+/* Botanical Candle Collection sprite: 10 borderless individual crops */
+.botanical-card__image{aspect-ratio:4/5;background-image:url("/images/botanical-candles-sprite.webp");background-repeat:no-repeat;background-size:500% 200%;border:1px solid rgba(142,116,69,.15);background-color:#090807}
+.botanical-card__image--0{background-position:0% 0%}
+.botanical-card__image--1{background-position:25% 0%}
+.botanical-card__image--2{background-position:50% 0%}
+.botanical-card__image--3{background-position:75% 0%}
+.botanical-card__image--4{background-position:100% 0%}
+.botanical-card__image--5{background-position:0% 100%}
+.botanical-card__image--6{background-position:25% 100%}
+.botanical-card__image--7{background-position:50% 100%}
+.botanical-card__image--8{background-position:75% 100%}
+.botanical-card__image--9{background-position:100% 100%}

@@ -5,7 +5,8 @@ import { PriceTag } from "./PriceTag";
 import { useMarket } from "./PricingProvider";
 import { getUi } from "@/data/i18n";
 import { intentionLabels, type Product } from "@/data/products";
-import { BotanicalCandleCollection } from "./BotanicalCandleCollection";\nimport { DivineCandleCollection } from "./DivineCandleCollection";
+import { BotanicalCandleCollection } from "./BotanicalCandleCollection";
+import { DivineCandleCollection } from "./DivineCandleCollection";
 
 const candleStudies = [
   ["Hecate Threshold", "Sculpted devotional form"],

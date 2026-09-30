@@ -295,3 +295,17 @@ body{background:#090807;color:var(--ivory);font-family:var(--body)}
 .divine-approved__card>a{grid-column:1/3;margin-top:9px;padding-top:8px;border-top:1px solid rgba(224,211,185,.07);color:#aa8d5a;font-size:.6rem}
 @media(max-width:900px){.divine-approved__grid{grid-template-columns:1fr 1fr}.divine-approved__intro{grid-template-columns:1fr}}
 @media(max-width:480px){.divine-approved__grid{grid-template-columns:1fr}}
+
+
+/* Devotional atelier studies: four user-approved images */
+.divine-atelier{margin-top:18px;padding-top:18px;border-top:1px solid rgba(142,116,69,.14)}
+.divine-atelier__intro{display:grid;grid-template-columns:180px 1fr;gap:18px;align-items:end;margin-bottom:12px}
+.divine-atelier__intro h3{margin:0;font-family:var(--display);font-size:1.55rem;font-weight:500;color:#d8ccb8}
+.divine-atelier__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.divine-atelier__grid article{padding:7px;border:1px solid rgba(224,211,185,.08);background:#0b0908}
+.divine-atelier__grid .divine-alt__image,.divine-extra__image{aspect-ratio:1/1;border:1px solid rgba(142,116,69,.14);background-color:#090807;background-repeat:no-repeat}
+.divine-atelier__grid .divine-alt__image{background-size:300% 100%}
+.divine-extra__image--isis-profile{background-image:url("/images/divine/isis-profile-study.webp");background-size:cover;background-position:center}
+.divine-atelier__grid strong{display:block;padding:8px 3px 3px;font-family:var(--display);font-size:.92rem;font-weight:500;color:#cdbfa9}
+@media(max-width:900px){.divine-atelier__grid{grid-template-columns:1fr 1fr}.divine-atelier__intro{grid-template-columns:1fr}}
+@media(max-width:480px){.divine-atelier__grid{grid-template-columns:1fr 1fr}}

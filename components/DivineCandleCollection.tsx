@@ -228,12 +228,6 @@ export function DivineCandleCollection(){
               <summary>{copy.open}</summary>
               <p>{study.description[language]}</p>
             </details>
-            {study.alt !== undefined && (
-              <div className="divine-card__alt">
-                <div className={`divine-alt__image divine-alt__image--${study.alt}`} role="img" aria-label={`${study.name} — ${copy.alt}`} />
-                <small>{copy.alt}</small>
-              </div>
-            )}
             <Link href={`/bespoke?product=CN-IV-DEV-001&association=${encodeURIComponent(study.name)}`}>{copy.commission} →</Link>
           </article>
         ))}
@@ -260,6 +254,32 @@ export function DivineCandleCollection(){
           ))}
         </div>
       </section>
+
+
+      <div className="divine-atelier">
+        <div className="divine-atelier__intro">
+          <p className="eyebrow">ATELIER STUDIES</p>
+          <h3>{language === "ro" ? "Patru studii vizuale păstrate exact în colecție." : "Four visual studies retained in the collection."}</h3>
+        </div>
+        <div className="divine-atelier__grid">
+          <article>
+            <div className="divine-alt__image divine-alt__image--0" role="img" aria-label="Selene — Moon & Wolf atelier study" />
+            <strong>Selene · Moon & Wolf</strong>
+          </article>
+          <article>
+            <div className="divine-alt__image divine-alt__image--2" role="img" aria-label="Isis — Egyptian altar atelier study" />
+            <strong>Isis · Altar Study I</strong>
+          </article>
+          <article>
+            <div className="divine-extra__image divine-extra__image--isis-profile" role="img" aria-label="Isis — profile atelier study" />
+            <strong>Isis · Altar Study II</strong>
+          </article>
+          <article>
+            <div className="divine-alt__image divine-alt__image--1" role="img" aria-label="Artemis — forest atelier study" />
+            <strong>Artemis · Forest Study</strong>
+          </article>
+        </div>
+      </div>
 
       <p className="divine-candles__note">{copy.note}</p>
     </div>

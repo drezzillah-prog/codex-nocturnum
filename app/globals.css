@@ -259,7 +259,7 @@ body{background:#090807;color:var(--ivory);font-family:var(--body)}
 .divine-candles__intro h2{margin:0!important}.divine-candles__intro>p:last-child{margin:0;color:#81796f}
 .divine-candles__grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
 .divine-card{display:flex;flex-direction:column;min-width:0;padding:8px;border:1px solid rgba(224,211,185,.08);background:#0c0a09}
-.divine-card__image{width:100%;aspect-ratio:4/5;background-image:url("/images/divine-candles-sprite.webp");background-repeat:no-repeat;background-size:500% 200%;border:1px solid rgba(142,116,69,.15);background-color:#090807}
+.divine-card__image{width:100%;aspect-ratio:4/5;background-image:url("/images/divine-candles-sprite.webp");background-repeat:no-repeat;background-size:500% 200%;border:1px solid rgba(142,116,69,.15);background-color:#090807;image-rendering:auto;filter:none}
 .divine-card__image--0{background-position:0% 0%}.divine-card__image--1{background-position:25% 0%}.divine-card__image--2{background-position:50% 0%}.divine-card__image--3{background-position:75% 0%}.divine-card__image--4{background-position:100% 0%}
 .divine-card__image--5{background-position:0% 100%}.divine-card__image--6{background-position:25% 100%}.divine-card__image--7{background-position:50% 100%}.divine-card__image--8{background-position:75% 100%}.divine-card__image--9{background-position:100% 100%}
 .divine-card__head{display:grid;grid-template-columns:24px 1fr;gap:7px;padding:10px 4px 3px}.divine-card__head span{font-size:.48rem;letter-spacing:.1em;color:#796643}.divine-card__head h3{margin:0;font-family:var(--display);font-size:1.05rem;font-weight:500;color:#d8ccb8}
@@ -271,8 +271,8 @@ body{background:#090807;color:var(--ivory);font-family:var(--body)}
 .divine-card>a{margin:auto 4px 3px;padding-top:8px;border-top:1px solid rgba(224,211,185,.07);color:#aa8d5a;font-size:.6rem}
 .divine-candles__note{margin:18px 0 0!important;padding:14px 16px;border:1px solid rgba(142,116,69,.12);color:#716a61!important;font-size:.66rem!important;line-height:1.55;background:rgba(86,37,40,.04)}
 @media(max-width:1150px){.divine-candles__grid{grid-template-columns:repeat(3,1fr)}.divine-candles__intro{grid-template-columns:1fr}}
-@media(max-width:700px){.divine-candles{padding:20px!important}.divine-candles__grid{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.divine-candles__grid{grid-template-columns:1fr}}
+@media(max-width:700px){.divine-candles{padding:18px!important}.divine-candles__grid{grid-template-columns:1fr 1fr;gap:10px}.divine-card{padding:7px}.divine-card__head{padding-top:8px}.divine-card details{margin-bottom:8px}}
+@media(max-width:480px){.divine-candles{padding:14px!important}.divine-candles__grid{grid-template-columns:1fr 1fr;gap:8px}.divine-card__head{grid-template-columns:18px 1fr;gap:5px}.divine-card__head h3{font-size:.94rem}.divine-card__association{font-size:.56rem}.divine-card details p{font-size:.6rem}.divine-card>a{font-size:.56rem}}
 
 
 /* Approved devotional atelier studies — exact retained imagery */
